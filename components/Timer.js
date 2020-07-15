@@ -73,7 +73,7 @@ const Timer = ({route, navigation}) => {
             time: timer,
             card: name,
             suit: suit,
-            exercixe: exercise
+            exercise: exercise
             
         };
         setResults(results.concat(resultCard));
@@ -85,6 +85,7 @@ const Timer = ({route, navigation}) => {
         // setResultsCard(time);
         navigation.navigate('Results', {results: [ results]} );
     }
+    console.log(results.length);
     return (
         <View style={styles.container}>
             

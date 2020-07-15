@@ -52,7 +52,7 @@ const Deck = (props) => {
     const [isHidden, setIsHidden] = useState(true);
     const [suitxercises, setSuitExercises] = useState(props.exercises);
     const [cardTime, setCardTime] = useState(0);
-    // const suitToLower = (shuffledDeck[0].getSuit()).toLowerCase();
+    const suitToLower = (shuffledDeck[0].getSuit()).toLowerCase();
     const dLength = createDeck().length;
    
     //Drop the first card in shuffledDeck
@@ -68,27 +68,22 @@ const Deck = (props) => {
 
     function handleCard() {
         const returnVals = {
-            // suit: shuffledDeck[0].getSuit(),
+            suit: shuffledDeck[0].getSuit(),
             exercise: suitxercises[suitToLower],
             name: shuffledDeck[0].getValue(),
             value: shuffledDeck[0].getFaceValue()
     
         }
         props.result(returnVals);
-        if (shuffledDeck.length > 1) {
+        if (shuffledDeck.length >= 1) {
             dropFirstCard();
         }
         
     };
 
     //When the deck length hits zero, tell Timer that the deck is finished
-    useEffect(() => {
-        if (shuffledDeck.length = 0) {
-            props.resultsLink();
-        }
-    },[shuffledDeck])
-
-    console.log(shuffledDeck[0].getSuit());
+ 
+    
     return (
         <View style={styles.container}>
             {appSettings.settings.useJokers ? <Text>Using Jokers</Text>: <Text>Not Using Jokers</Text>}
@@ -100,7 +95,7 @@ const Deck = (props) => {
                             <Image style={styles.image} source={shuffledDeck[0].getLink()} />
                         </View>
                     </SwipeGesture> 
-                    {/* <Text style={styles.header}>{shuffledDeck[0].getFaceValue()} {suitxercises[suitToLower]} </Text> */}
+                    <Text style={styles.header}>{shuffledDeck[0].getFaceValue()} {suitxercises[suitToLower]} </Text>
                 </View>
             : null}
             <Text>{shuffledDeck.length}/{dLength}</Text>  
