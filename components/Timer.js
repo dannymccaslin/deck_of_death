@@ -87,11 +87,10 @@ const Timer = ({route, navigation}) => {
     }
     return (
         <View style={styles.container}>
-            {1 >= 1 ?
+            
             <View>            
                 <Deck exercises={suitlist} result={setResultsCard} resultsLink={finishDeck} />
-                </View>:
-                <Button onPress={() => finishDeck()} title="End Deck" /> }
+                </View>
           
    
             <Text onChange={handleChange}>{minutes}:{secs}</Text>
