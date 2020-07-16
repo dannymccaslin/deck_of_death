@@ -1,3 +1,3 @@
-import SwipeGesture from './swipe-gesture';
+import SwipeGesture from "./swipe-gesture";
 
-export default SwipeGesture
+export default SwipeGesture;

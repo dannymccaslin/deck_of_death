@@ -1,2 +1,1 @@
-import Context from './SettingsContext';
-
+import Context from "./SettingsContext";
