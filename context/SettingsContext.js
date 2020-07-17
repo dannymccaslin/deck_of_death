@@ -7,6 +7,7 @@ const defaultSettings = {
   jokersExercise: "",
   jokersReps: "15",
   numberOfDecks: 1,
+  aceValue: 11
 };
 
 export const SettingsProvider = ({ children, settings }) => {

@@ -1,7 +1,12 @@
+import React, {useContext} from 'react';
 import PlayingCard from "./PlayingCard";
+import SettingsContext, { SettingsConsumer } from "../context/SettingsContext";
+
 
 //Create the deck
 const createDeck = () => {
+    const appSettings = useContext(SettingsContext);
+
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i

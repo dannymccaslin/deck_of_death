@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { TextInput, Button, Text, View, StyleSheet } from "react-native";
+import { TextInput, Button, Text, View, StyleSheet,AsyncStorage } from "react-native";
 import { TouchableHighlight, ScrollView } from "react-native-gesture-handler";
+import { Card } from "react-native-paper";
 
 const Results = ({ route }) => {
   const { results } = route.params;
@@ -12,7 +13,18 @@ const Results = ({ route }) => {
   let heartsTime = 0;
   let jokersTime = 0;
   const res = results[0];
-  for (var i = 0; i < res.length; i++) {}
+  const date = new Date();
+_storeData = async () => {
+  try {
+    await AsyncStorage.setItem(
+      toString(date),
+      JSON.stringify(results)
+
+    );
+  } catch (error) {
+    console.log('Error: ', error);
+  };
+};  
   const timeView = (time) => {
     let secs = ("0" + (Math.floor(time / 1) % 60)).slice(-2);
     let minutes = ("0" + (Math.floor(time / 60) % 60)).slice(-2);
@@ -55,11 +67,21 @@ const Results = ({ route }) => {
   });
   return (
     <View>
-      <Text>Spades: {timeView(spadesTime)}</Text>
+      <Card>
+        <Text>Spades: {timeView(spadesTime)}</Text>
+      </Card>
+      <Card>
       <Text>Clubs: {timeView(clubsTime)}</Text>
+      </Card>
+      <Card>
       <Text>Diamonds: {timeView(diamondsTime)}</Text>
+      </Card>
+      <Card>
       <Text>Hearts: {timeView(heartsTime)}</Text>
+      </Card>
+      <Card>
       <Text>Total: {timeView(totalTime)}</Text>
+      </Card>
       <Text> ---------------------</Text>
       <ScrollView>{cardMap}</ScrollView>
     </View>

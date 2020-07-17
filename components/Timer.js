@@ -57,18 +57,21 @@ const Timer = ({ route, navigation }) => {
     reset();
   };
 
-  const finishDeck = (event) => {
+  const finishDeck = () => {
     // const time = event;
     // setResultsCard(time);
+    console.log("finishing");
     navigation.navigate("Results", { results: [results] });
   };
+
+
   return (
     <View style={styles.container}>
       <View>
         <Deck
           exercises={suitlist}
-          onResult={setResultsCard()}
-          onEndDeck={finishDeck()}
+          onResult={setResultsCard}
+          onEndDeck={finishDeck}
         />
       </View>
 
@@ -95,14 +98,7 @@ const styles = StyleSheet.create({
     width: 260,
     height: 400,
   },
-  buttonStyle: {
-    marginTop: 10,
-    width: 100,
-    height: 50,
-    backgroundColor: "#009688",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  
   buttonText: {
     color: "white",
     fontSize: 20,

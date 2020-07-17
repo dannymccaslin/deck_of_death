@@ -7,6 +7,7 @@ import {
   View,
   StyleSheet,
 } from "react-native";
+import {RadioButton} from 'react-native-paper';
 import SettingsContext, { SettingsConsumer } from "../context/SettingsContext";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
@@ -18,11 +19,13 @@ const Settings = () => {
   );
   const [jokersReps, setJokersReps] = useState(appSettings.settings.jokersReps);
   const [noDecks, setNoDecks] = useState(appSettings.settings.numberOfDecks);
+  const [aceValue, setAceValue] = useState(11);
   const toggleJokers = () => setUseJokers((previousState) => !previousState);
   const changeExercise = (text) => setJokersExercise(text);
   const changeNumberReps = (text) => setJokersReps(text);
   const changeNoDecks = (text) => setNoDecks(text);
 
+ 
   const updateSettings = () => {
     const newState = {
       useJokers: useJokers,
@@ -65,6 +68,17 @@ const Settings = () => {
         value={noDecks}
         onChangeText={changeNoDecks}
       />
+      <Text>Ace Value</Text>
+      <RadioButton
+        value="11"
+        status={ aceValue === 11 ? 'checked' : 'unchecked'}
+        onPress={() => setAceValue(11)} 
+        />
+        <RadioButton
+        value="1"
+        status={ aceValue === 1 ? 'checked' : 'unchecked'}
+        onPress={() => setAceValue(1)} 
+        />
       <TouchableHighlight style={styles.buttonStyle} onPress={updateSettings}>
         <Text style={styles.buttonText}>Save Settings</Text>
       </TouchableHighlight>

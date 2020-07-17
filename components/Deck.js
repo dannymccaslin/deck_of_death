@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, Button } from "react-native";
+import { Overlay} from 'react-native-elements'
 import { HeaderTitle } from "@react-navigation/stack";
 import SettingsContext, { SettingsConsumer } from "../context/SettingsContext";
 import SwipeGesture from "../swipe-gesture/swipe-gesture";
 import createDeck from "./CreateDeck";
+import { cos } from "react-native-reanimated";
 
 const Deck = (props) => {
   //Import Settings
@@ -11,7 +13,7 @@ const Deck = (props) => {
 
   //Define State Hooks
   const [shuffledDeck, setShuffledDeck] = useState(createDeck());
-  const [isHidden, setIsHidden] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
   const [suitxercises, setSuitExercises] = useState(props.exercises);
   const [cardTime, setCardTime] = useState(0);
   let suitToLower = "";
@@ -23,7 +25,6 @@ const Deck = (props) => {
   //Drop the first card in shuffledDeck
   const dropFirstCard = () => {
     const newDeck = [...shuffledDeck];
-    console.log("New Deck", newDeck);
     newDeck.shift();
     setShuffledDeck(newDeck);
   };
@@ -31,20 +32,27 @@ const Deck = (props) => {
   //Send card data back to Timer to be logged in Results
 
   function handleCard() {
+      console.log('before if ', shuffledDeck.length)
     if (shuffledDeck.length > 0) {
+        console.log('handle card ', shuffledDeck.length);
       const returnVals = {
         suit: shuffledDeck[0].getSuit(),
         exercise: suitxercises[suitToLower],
         name: shuffledDeck[0].getValue(),
         value: shuffledDeck[0].getFaceValue(),
       };
-      console.log("Return Vals", returnVals);
       props.onResult(returnVals);
-      console.log("Length of Deck", shuffledDeck.length);
       dropFirstCard();
     } else {
+        console.log('end ', shuffledDeck.length);
       props.onEndDeck();
     }
+  };
+
+  const endDeck = () => {
+      setIsVisible(false);
+      props.onEndDeck();
+      console.log(isVisible);
   }
 
   //When the deck length hits zero, tell Timer that the deck is finished
@@ -57,7 +65,7 @@ const Deck = (props) => {
         <Text>Not Using Jokers</Text>
       )}
       {shuffledDeck.length >= 1 ? (
-        <View>
+        <View style={styles.container}>
           <SwipeGesture onSwipePerformed={handleCard}>
             <View style={styles.cardImage}>
               <Image style={styles.image} source={shuffledDeck[0].getLink()} />
@@ -67,7 +75,13 @@ const Deck = (props) => {
             {shuffledDeck[0].getFaceValue()} {suitxercises[suitToLower]}{" "}
           </Text>
         </View>
-      ) : null}
+      ) : <Overlay style={styles.overlay} isVisible={isVisible} fullScreen={true} onBackdropPress={endDeck}>
+            <View style={styles.container}>
+            <Text>Congratulations!</Text>
+            <Text>Tap for Results</Text>
+            <Button onPress={endDeck} title="Click Here"></Button>
+            </View>
+          </Overlay>}
       <Text>
         {shuffledDeck.length}/{dLength}
       </Text>
@@ -76,6 +90,9 @@ const Deck = (props) => {
 };
 
 const styles = StyleSheet.create({
+    overlay: {
+        justifyContent: 'center'
+    },  
   container: {
     alignContent: "center",
     alignItems: "center",

@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Settings from "./components/Settings";
 import Timer from "./components/Timer";
 import Results from "./components/Results";
+import History from './components/History';
 import { SettingsProvider } from "./context/SettingsContext";
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
           <Stack.Screen name="Assign Suits" component={AssignSuits} />
           <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen name="Results" component={Results} />
+          <Stack.Screen name="History" component={History} />
         </Stack.Navigator>
       </NavigationContainer>
     </SettingsProvider>
