@@ -1,6 +1,11 @@
+import React ,{useContext} from 'react';
+ 
 import CardImage from "./CardImage";
+import SettingsContext from '../context/SettingsContext';
+
 
 class PlayingCard {
+
   constructor(s, f) {
     this.suit = s;
     this.face = f;
@@ -11,7 +16,7 @@ class PlayingCard {
     //Get the Face Value (What the card is worth)
     this.getFaceValue = () => {
       if (this.face === "Ace") {
-        return 11;
+        return parseInt(appSettings.settings.aceValue);
       } else if (
         this.face === "King" ||
         this.face === "Queen" ||
@@ -20,7 +25,7 @@ class PlayingCard {
       ) {
         return 10;
       } else if (this.face === "Joker") {
-        return 15;
+        return parseInt(appSettings.settings.jokerReps);
       } else {
         return parseInt(this.face);
       }
@@ -32,12 +37,16 @@ class PlayingCard {
     //Transform card names into the names of the PNG files
     this.getLink = () => {
       let fiv = "";
+      let fis = '';
       if (this.face === "10") {
         fiv = "10";
+      } else if (this.face === "Joker") { 
+        fiv = 'J';
+        fis = 'J'; 
       } else {
         fiv = this.face[0];
       }
-      let fis = this.suit[0];
+       fis = this.suit[0];
       const key = fiv + fis;
       return CardImage[key];
     };

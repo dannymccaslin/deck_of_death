@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TextInput, Button, Text, View, StyleSheet, Image } from "react-native";
+import {Icon} from 'react-native-elements';
 import Deck from "./Deck";
 import { TouchableHighlight } from "react-native-gesture-handler";
 
@@ -60,27 +61,28 @@ const Timer = ({ route, navigation }) => {
   const finishDeck = () => {
     // const time = event;
     // setResultsCard(time);
-    console.log("finishing");
     navigation.navigate("Results", { results: [results] });
   };
 
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{flex: 4}}>
         <Deck
           exercises={suitlist}
           onResult={setResultsCard}
           onEndDeck={finishDeck}
         />
       </View>
-
-      <Text onChange={handleChange}>
-        {minutes}:{secs}
-      </Text>
-      <TouchableHighlight style={styles.buttonStylePause} onPress={toggle}>
-        <Text style={styles.buttonText}>{isActive ? "Pause" : "Resume"}</Text>
-      </TouchableHighlight>
+      <View style={styles.bottomText}>
+        <Text style={styles.timerText} onChange={handleChange}>
+          {minutes}:{secs}
+        </Text>
+        <TouchableHighlight style={styles.buttonStylePause} onPress={toggle}>
+          {!isActive ? <Icon size={60} name="pause-circle-filled" /> : <Icon size={60} name='pause-circle-outline' />}
+          {/* <Text style={styles.buttonText}>{isActive ? "Pause" : "Resume"}</Text> */}
+        </TouchableHighlight>
+      </View>
     </View>
   );
 };
@@ -89,14 +91,15 @@ const styles = StyleSheet.create({
   container: {
     alignContent: "center",
     alignItems: "center",
+    flex: 1
   },
   swipesGestureContainer: {
     height: "100%",
     width: "100%",
   },
   cardImage: {
-    width: 260,
-    height: 400,
+    width: "60%",
+    height: "60%"
   },
   
   buttonText: {
@@ -104,12 +107,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   buttonStylePause: {
-    backgroundColor: "orange",
-    marginTop: 10,
     width: 100,
-    height: 50,
     alignItems: "center",
     justifyContent: "center",
   },
+  bottomText: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginBottom:6
+
+  },
+  timerText: {
+    fontSize:38,
+  }
 });
 export default Timer;

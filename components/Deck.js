@@ -32,12 +32,14 @@ const Deck = (props) => {
   //Send card data back to Timer to be logged in Results
 
   function handleCard() {
-      console.log('before if ', shuffledDeck.length)
     if (shuffledDeck.length > 0) {
-        console.log('handle card ', shuffledDeck.length);
+      let exercise = suitxercises[suitToLower];
+      if (shuffledDeck[0].getSuit() === 'Joker') {
+        exercise = appSettings.settings.jokersExercise
+      };
       const returnVals = {
         suit: shuffledDeck[0].getSuit(),
-        exercise: suitxercises[suitToLower],
+        exercise: exercise,
         name: shuffledDeck[0].getValue(),
         value: shuffledDeck[0].getFaceValue(),
       };
@@ -64,6 +66,9 @@ const Deck = (props) => {
       ) : (
         <Text>Not Using Jokers</Text>
       )}
+            <Text>
+        {shuffledDeck.length}/{dLength}
+      </Text>
       {shuffledDeck.length >= 1 ? (
         <View style={styles.container}>
           <SwipeGesture onSwipePerformed={handleCard}>
@@ -71,9 +76,12 @@ const Deck = (props) => {
               <Image style={styles.image} source={shuffledDeck[0].getLink()} />
             </View>
           </SwipeGesture>
-          <Text style={styles.header}>
-            {shuffledDeck[0].getFaceValue()} {suitxercises[suitToLower]}{" "}
-          </Text>
+          
+            {shuffledDeck[0].getSuit() === 'Joker' ? 
+              <Text style={styles.header}>{shuffledDeck[0].getFaceValue()} {appSettings.settings.jokersExercise} </Text> : 
+              <Text style={styles.header}>{shuffledDeck[0].getFaceValue()} {suitxercises[suitToLower]} </Text>
+          }
+          
         </View>
       ) : <Overlay style={styles.overlay} isVisible={isVisible} fullScreen={true} onBackdropPress={endDeck}>
             <View style={styles.container}>
@@ -82,9 +90,7 @@ const Deck = (props) => {
             <Button onPress={endDeck} title="Click Here"></Button>
             </View>
           </Overlay>}
-      <Text>
-        {shuffledDeck.length}/{dLength}
-      </Text>
+
     </View>
   );
 };
@@ -96,13 +102,14 @@ const styles = StyleSheet.create({
   container: {
     alignContent: "center",
     alignItems: "center",
+    flex: 1
   },
   cardImage: {
     width: 350,
     height: 538,
   },
   image: {
-    flex: 1,
+    flex: 3,
     width: null,
     height: null,
     resizeMode: "contain",
@@ -111,8 +118,8 @@ const styles = StyleSheet.create({
     width: 10,
   },
   header: {
-    margin: 10,
-    fontSize: 20,
+    flex:1,
+    fontSize: 32,
     fontWeight: "bold",
   },
 });

@@ -51,6 +51,6 @@ export const CardImage = {
   JH: require("../assets/images/JH.png"),
   QH: require("../assets/images/QH.png"),
   KH: require("../assets/images/KH.png"),
-  //  'JJ':  require('../assets/images/JJ.png') ,
+   'JJ':  require('../assets/images/JJ.png') ,
 };
 export default CardImage;

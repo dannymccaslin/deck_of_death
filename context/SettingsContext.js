@@ -5,9 +5,9 @@ const SettingsContext = React.createContext();
 const defaultSettings = {
   useJokers: false,
   jokersExercise: "",
-  jokersReps: "15",
-  numberOfDecks: 1,
-  aceValue: 11
+  jokersReps: '15',
+  numberOfDecks: '1',
+  aceValue: '11'
 };
 
 export const SettingsProvider = ({ children, settings }) => {

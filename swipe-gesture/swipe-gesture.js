@@ -9,7 +9,7 @@ export default class SwipeGesture extends Component {
         let x = gestureState.dx;
         let y = gestureState.dy;
         if (Math.abs(x) > Math.abs(y)) {
-          if (x >= 0) {
+          if (x >= 1) {
             this.props.onSwipePerformed("right");
           } else {
             this.props.onSwipePerformed("left");

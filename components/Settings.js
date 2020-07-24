@@ -10,8 +10,9 @@ import {
 import {RadioButton} from 'react-native-paper';
 import SettingsContext, { SettingsConsumer } from "../context/SettingsContext";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import {Toast} from 'react-native-root-toast';
 
-const Settings = () => {
+const Settings = ({navigation}) => {
   const appSettings = useContext(SettingsContext);
   const [useJokers, setUseJokers] = useState(appSettings.settings.useJokers);
   const [jokersExercise, setJokersExercise] = useState(
@@ -19,11 +20,12 @@ const Settings = () => {
   );
   const [jokersReps, setJokersReps] = useState(appSettings.settings.jokersReps);
   const [noDecks, setNoDecks] = useState(appSettings.settings.numberOfDecks);
-  const [aceValue, setAceValue] = useState(11);
+  const [aceValue, setAceValue] = useState(appSettings.settings.aceValue);
   const toggleJokers = () => setUseJokers((previousState) => !previousState);
   const changeExercise = (text) => setJokersExercise(text);
   const changeNumberReps = (text) => setJokersReps(text);
   const changeNoDecks = (text) => setNoDecks(text);
+
 
  
   const updateSettings = () => {
@@ -32,8 +34,11 @@ const Settings = () => {
       jokersExercise: jokersExercise,
       jokersReps: jokersReps,
       numberOfDecks: noDecks,
+      aceValue: aceValue
     };
     appSettings.saveSettings(newState);
+    navigation.navigate('Home');
+    
   };
   return (
     <View style={styles.container}>
@@ -69,15 +74,17 @@ const Settings = () => {
         onChangeText={changeNoDecks}
       />
       <Text>Ace Value</Text>
+      <Text>11</Text>
       <RadioButton
         value="11"
-        status={ aceValue === 11 ? 'checked' : 'unchecked'}
-        onPress={() => setAceValue(11)} 
+        status={ aceValue === '11' ? 'checked' : 'unchecked'}
+        onPress={() => setAceValue('11')} 
         />
+        <Text>1</Text>
         <RadioButton
         value="1"
-        status={ aceValue === 1 ? 'checked' : 'unchecked'}
-        onPress={() => setAceValue(1)} 
+        status={ aceValue === '1' ? 'checked' : 'unchecked'}
+        onPress={() => setAceValue('1')} 
         />
       <TouchableHighlight style={styles.buttonStyle} onPress={updateSettings}>
         <Text style={styles.buttonText}>Save Settings</Text>
