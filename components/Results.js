@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { TextInput, Button, Text, View, StyleSheet,AsyncStorage ,TouchableOpacity} from "react-native";
+import { TextInput, Button, Text, View, StyleSheet,TouchableOpacity} from "react-native";
 import { TouchableHighlight, ScrollView } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Results = ({ route, navigation }) => {
   const { results } = route.params;
@@ -13,15 +14,15 @@ const Results = ({ route, navigation }) => {
   let heartsTime = 0;
   let jokersTime = 0;
   const res = results[0];
-  const date = new Date();
+  const date =  Date.now();
+  const dateString = date.toString();
 
  const goToHistory =() => {
    navigation.navigate('History');
  }
-console.log(date);
   useEffect(() => {
     AsyncStorage.setItem(
-          toString(date),
+          dateString,
           JSON.stringify(res)
           
         );
@@ -40,13 +41,27 @@ console.log(date);
   };
 
   const displayData = async ()=>{  
-    try{  
-      let user = await AsyncStorage.getItem(toString(date));  
-      alert(user);  
-    }  
-    catch(error){  
-      alert(error)  
-    }  
+    let keys = [];
+    try{
+      keys = await  AsyncStorage.getAllKeys();
+      console.log(keys);
+      alert(
+        
+        keys.map(k => {
+          console.log(typeof(k), k);
+
+          return(
+          k
+          )
+        })
+       
+      );
+    }
+    catch (error) {
+     alert(error);
+ }
+
+ console.log('Keys: ', keys);
   }
 
   const cardMap = res.map((cardres, index) => {
