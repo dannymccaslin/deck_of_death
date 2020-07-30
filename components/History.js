@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text,StyleSheet,View} from 'react-native';
-import Accordian from './Accordion';
+import Accordian from './Accordian';
 import { Card } from 'react-native-paper';
 import { ListItem } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -28,22 +28,24 @@ const History = () => {
     const fetchAllItems = async () => {
         try{
             let hist = [];
-            let keys;
+            let keys = [];
             let values;
              keys = await  AsyncStorage.getAllKeys();
-             keys.forEach(key => {
-                values = await AsyncStorage.getItem(keys);
+             keys.forEach( async key => {
+                 console.log('Single Key', key);
+                values =  await AsyncStorage.getItem(key);
                 hist.push(
                     {
                     title: key,
-                    data: value
+                    data: values
                     }
                     );
              } )
              
-             console.log('Keys: ', keys);
-            
+            //  console.log('Keys: ', keys);
+             console.log("Hist ", hist);
              return hist;
+             
 
         }
             catch (error) {
@@ -51,11 +53,12 @@ const History = () => {
             }    
         }
     
-    renderAccordion = (array) => {
+    const renderAccordion = (array) => {
         const items = [];
-        for ( item of array) {
+        for ( var item of array) {
             items.push(
-                <Accordian key={item.title} onDelete={deleteItem(item.title)}
+                <Accordian key={item.title} 
+                // onDelete={deleteItem(item.title)}
                 title = {item.title}
                 data = {item.data}
             />
@@ -65,7 +68,7 @@ const History = () => {
         return items;
     }
 
-    deleteItem = (e) => {
+    const deleteItem = (e) => {
         console.log('delete', e);
     }
 

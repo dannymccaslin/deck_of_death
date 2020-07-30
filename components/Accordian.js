@@ -21,7 +21,7 @@ export default class Accordian extends Component{
 
     return (
        <View>
-            <TouchableOpacity ref={this.accordian} style={styles.row} onPress={()=>this.toggleExpand()} delayLongPress={1000} onLongPress={this.toggleDelete}>
+            <TouchableOpacity ref={this.accordian} style={styles.row} onPress={()=>this.toggleExpand()} delayLongPress={1000} >
                 <Text style={[styles.title, styles.font]}>{this.props.title}</Text>
                 <Icon name={this.state.expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color='white' />
             </TouchableOpacity>
@@ -41,7 +41,7 @@ export default class Accordian extends Component{
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.setState({expanded : !this.state.expanded})
   }
-
+//   onLongPress={this.toggleDelete}
   toggleDelete=() => {
       Alert.alert(
           "Delete",
