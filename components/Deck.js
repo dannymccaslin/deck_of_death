@@ -61,12 +61,7 @@ const Deck = (props) => {
 
   return (
     <View style={styles.container}>
-      {appSettings.settings.useJokers ? (
-        <Text>Using Jokers</Text>
-      ) : (
-        <Text>Not Using Jokers</Text>
-      )}
-            <Text>
+      <Text>
         {shuffledDeck.length}/{dLength}
       </Text>
       {shuffledDeck.length >= 1 ? (

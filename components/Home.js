@@ -6,7 +6,6 @@ const Home = ({ navigation }) => {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <View style={styles.container}>
-      <Text>This is Home</Text>
       <TouchableHighlight style={styles.buttonStyle} onPress={() => navigation.navigate("Assign Suits")}>
         <Text style={styles.buttonText}
           title="Assign Exercises to Suits"
@@ -39,18 +38,25 @@ const Home = ({ navigation }) => {
 };
 export default Home;
 
+const width_proportion = '90%';
+const height_proportion = '20%';
+
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#5A9BD4',
+  },
   buttonStyle: {
-    marginTop: 10,
-    width: 200,
-    height: 100,
+    flexDirection: 'row',
+    width: width_proportion,
+    height: height_proportion,
     backgroundColor: "#009688",
     alignItems: "center",
     justifyContent: "center",
   },
-  container: {
-    alignItems: "center",
-  },
+  
   buttonText: {
     color: "white",
     fontSize: 14,
