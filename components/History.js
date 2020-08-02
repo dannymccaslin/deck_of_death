@@ -79,10 +79,12 @@ const History = () => {
             const dateNum = parseInt(item.title);
             const date = new Date(dateNum);
             const dateFormat = moment(date).format('MMMM Do YYYY, h:mm a');
+            console.log(item.title);
             items.push(
                 <Accordian key={item.title} 
                 style={styles.accordian}
-                // onDelete={deleteItem(item.title)}
+                id = {item.title}
+                onDelete={(e) => deleteItem(e)}
                 title = {dateFormat}
                 data = {item.data}
             />

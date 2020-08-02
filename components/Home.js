@@ -1,30 +1,37 @@
 import React, { useState } from "react";
 import { TextInput, Button, Text, View, StyleSheet } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { TouchableHighlight, TouchableOpacity } from "react-native-gesture-handler";
 
 const Home = ({ navigation }) => {
   const [isVisible, setIsVisible] = useState(false);
   return (
     <View style={styles.container}>
-      <TouchableHighlight style={styles.buttonStyle} onPress={() => navigation.navigate("Assign Suits")}>
+      <View style={styles.buttonStyle}>
+      <TouchableHighlight style={styles.buttonStyleTouchable} onPress={() => navigation.navigate("Assign Suits")}>
         <Text style={styles.buttonText}
           title="Assign Exercises to Suits"
           
         >Assign Exercises to Suits</Text>
       </TouchableHighlight>
-      <TouchableHighlight style={styles.buttonStyle} onPress={() => navigation.navigate("Settings")}>
+      </View>
+      <View style={styles.buttonStyle}>
+      <TouchableHighlight style={styles.buttonStyleTouchable} onPress={() => navigation.navigate("Settings")}>
         <Text style={styles.buttonText}
           title="Change Settings">Change Settings
           </Text>
         
       </TouchableHighlight>
-      <TouchableHighlight style={styles.buttonStyle} onPress={() => navigation.navigate("History")}>
+      </View>
+      <View style={styles.buttonStyle}>
+        <TouchableHighlight style={styles.buttonStyleTouchable} onPress={() => navigation.navigate("History")}>
         <Text style={styles.buttonText}
           title="History">Workout History
           </Text>
         
       </TouchableHighlight>
-      <TouchableHighlight style={styles.buttonStyle}  onPress={() => {
+      </View>
+      <View style={styles.buttonStyle}>
+      <TouchableHighlight  style={styles.buttonStyleTouchable} onPress={() => {
             { isVisible ? setIsVisible(false) : setIsVisible(true)};
           }}>
         <Text style={styles.buttonText}
@@ -32,30 +39,35 @@ const Home = ({ navigation }) => {
          
        
       </TouchableHighlight>
+      </View>
       {isVisible ? <Text>Danny McCaslin</Text> : <Text>Alt</Text>}
     </View>
   );
 };
 export default Home;
 
-const width_proportion = 300;
-const height_proportion = 100;
+const width_proportion = "80%";
+const height_proportion = "15%";
 
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    flex: 1,
+    flexDirection: 'column',
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     backgroundColor: '#5A9BD4',
   },
   buttonStyle: {
-    margin: 10,
-    flexDirection: 'row',
+    // margin: 3,
     width: width_proportion,
     height: height_proportion,
     backgroundColor: "#009688",
-    alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
+  },
+  buttonStyleTouchable : {
+    width: '100%',
+    height: '100%',
   },
   
   buttonText: {

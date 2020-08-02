@@ -10,6 +10,7 @@ export default class Accordian extends Component{
         this.state = { 
           data: props.data,
           expanded : false,
+
         }
 
         if (Platform.OS === 'android') {
@@ -21,7 +22,7 @@ export default class Accordian extends Component{
 
     return (
        <View>
-            <TouchableOpacity ref={this.accordian} style={styles.row} onPress={()=>this.toggleExpand()} delayLongPress={1000} >
+            <TouchableOpacity ref={this.accordian} style={styles.row} onPress={()=>this.toggleExpand()} delayLongPress={1000} onLongPress={() => this.toggleDelete()} >
                 <Text style={[styles.title, styles.font]}>{this.props.title}</Text>
                 <Icon name={this.state.expanded ? 'keyboard-arrow-up' : 'keyboard-arrow-down'} size={30} color='white' />
             </TouchableOpacity>
@@ -40,9 +41,9 @@ export default class Accordian extends Component{
   toggleExpand = () =>{
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.setState({expanded : !this.state.expanded})
-  }
+  };
 //   onLongPress={this.toggleDelete}
-  toggleDelete=() => {
+   toggleDelete() {
       Alert.alert(
           "Delete",
           "Are you sure you want to delete?",
@@ -51,7 +52,7 @@ export default class Accordian extends Component{
               text: "Cancel",
               onPress: () => console.log("Cancel Pressed"),
             },
-            { text: "OK", onPress: () => this.props.onDelete }
+            { text: "OK", onPress: () => this.props.onDelete(this.props.id) }
           ],
           {cancelable: false}
       )
