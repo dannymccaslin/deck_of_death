@@ -38,8 +38,8 @@ const Home = ({ navigation }) => {
 };
 export default Home;
 
-const width_proportion = '90%';
-const height_proportion = '20%';
+const width_proportion = 300;
+const height_proportion = 100;
 
 const styles = StyleSheet.create({
   container: {
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#5A9BD4',
   },
   buttonStyle: {
+    margin: 10,
     flexDirection: 'row',
     width: width_proportion,
     height: height_proportion,
