@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "Scripts:App.App (nodejs10.x)",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "",
+                "lambdaHandler": "App.App"
+            },
+            "lambda": {
+                "runtime": "nodejs10.x",
+                "payload": {},
+                "environmentVariables": {}
+            }
+        }
+    ]
+}

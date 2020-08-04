@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useFocusEffect } from "react";
 import { TextInput, Button, Text, View, StyleSheet,TouchableOpacity} from "react-native";
 import { TouchableHighlight, ScrollView } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
 import AsyncStorage from '@react-native-community/async-storage';
+import { useFocusEffect } from "@react-navigation/native";
 
 const Results = ({ route, navigation }) => {
   const { results } = route.params;
@@ -60,7 +61,14 @@ const Results = ({ route, navigation }) => {
     catch (error) {
      alert(error);
  }
-
+useFocusEffect( 
+  React.useCallback(() => {
+    const onBackPress = () => {
+      navigation.navigate('Home')
+    };
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+  })
+)
  console.log('Keys: ', keys);
   }
 

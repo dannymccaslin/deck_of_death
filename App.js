@@ -24,11 +24,11 @@ export default function App() {
     <SettingsProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Timer" component={Timer} />
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen options={{headerShown: false}} name="Timer" component={Timer} />
+          <Stack.Screen options={{headerShown: false}} name="Home" component={Home} />
           <Stack.Screen name="Assign Suits" component={AssignSuits} />
           <Stack.Screen name="Settings" component={Settings} />
-          <Stack.Screen name="Results" component={Results} />
+          <Stack.Screen options={{headerShown: false}} name="Results" component={Results} />
           <Stack.Screen name="History" component={History} />
         </Stack.Navigator>
       </NavigationContainer>

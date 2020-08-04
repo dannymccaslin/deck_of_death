@@ -61,7 +61,7 @@ const Deck = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text>
+      <Text style={styles.cardCount}>
         {shuffledDeck.length}/{dLength}
       </Text>
       {shuffledDeck.length >= 1 ? (
@@ -97,7 +97,9 @@ const styles = StyleSheet.create({
   container: {
     alignContent: "center",
     alignItems: "center",
-    flex: 1
+    flex: 1,
+    backgroundColor: '#353839',
+
   },
   cardImage: {
     width: 350,
@@ -116,6 +118,11 @@ const styles = StyleSheet.create({
     flex:1,
     fontSize: 32,
     fontWeight: "bold",
+    color: 'white'
+  },
+  cardCount: {
+    fontSize: 16,
+    color: 'white'
   },
 });
 

@@ -59,7 +59,7 @@ const AssignSuits = ({ sendExercises, navigation }) => {
         onPress={collectExercises}
         title="Submit"
       >
-        <Text style={styles.buttonText}>SUBMIT</Text>
+        <Text style={styles.buttonText}>START</Text>
       </TouchableHighlight>
     </View>
   );
@@ -87,9 +87,14 @@ const styles = StyleSheet.create({
     alignContent: "center",
     fontSize: 20,
     margin: 10,
+    color: 'white'
   },
   container: {
     alignItems: "center",
+    backgroundColor: '#353839',
+    height: '100%',
+    width: '100%'
+
   },
 });
 export default AssignSuits;

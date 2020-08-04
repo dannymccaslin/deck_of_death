@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { TextInput, Button, Text, View, StyleSheet, Image } from "react-native";
+import React, { useState, useEffect,useFocusEffect } from "react";
+import { TextInput, Button, Text, View, StyleSheet, Image, BackHandler, Alert } from "react-native";
 import {Icon} from 'react-native-elements';
 import Deck from "./Deck";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { useFocusEffect } from "@react-navigation/native";
 
 // import { HeaderTitle } from '@react-navigation/stack';
 
@@ -13,6 +14,29 @@ const Timer = ({ route, navigation }) => {
   const [isActive, setIsActive] = useState(true);
   const [results, setResults] = useState([]);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert(
+          "Cancel Workout",
+          "Are you sure you want to cancel your workout? This will return you to the Home screen. Your progress will not be saved.",
+          [
+            {
+              text: "Keep Going",
+              onPress: () => console.log("Cancel Pressed"),
+            },
+            { text: "Go Home", onPress: () => navigation.navigate('Home') }
+          ],
+          {cancelable: false}
+      )
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    })
+  )
+
+  
   function toggle() {
     setIsActive(!isActive);
   }
@@ -79,7 +103,7 @@ const Timer = ({ route, navigation }) => {
           {minutes}:{secs}
         </Text>
         <TouchableHighlight style={styles.buttonStylePause} onPress={toggle}>
-          {!isActive ? <Icon size={60} name="pause-circle-filled" /> : <Icon size={60} name='pause-circle-outline' />}
+          {!isActive ? <Icon size={60} color={'white'} name="pause-circle-filled" /> : <Icon size={60} color={'white'} name='pause-circle-outline' />}
           {/* <Text style={styles.buttonText}>{isActive ? "Pause" : "Resume"}</Text> */}
         </TouchableHighlight>
       </View>
@@ -91,7 +115,10 @@ const styles = StyleSheet.create({
   container: {
     alignContent: "center",
     alignItems: "center",
-    flex: 1
+    flex: 1,
+    backgroundColor: '#353839',
+    marginTop: '6%'
+
   },
   swipesGestureContainer: {
     height: "100%",
@@ -119,6 +146,7 @@ const styles = StyleSheet.create({
   },
   timerText: {
     fontSize:38,
+    color: 'white'
   }
 });
 export default Timer;
