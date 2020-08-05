@@ -69,7 +69,7 @@ const Home = ({ navigation }) => {
               <Text style={styles.modalText}>Developed by: 
                 <Text style={styles.textLink} onPress={() => {loadBrowser('http://www.dannymccaslin.org')}}>Danny McCaslin</Text>
               </Text>
-              <Text style={styles.modalText}>Special Thanks: Andy Realto</Text>
+              <Text style={styles.modalText}>Special Thanks: Andy Relanto</Text>
             
 
             <TouchableHighlight
