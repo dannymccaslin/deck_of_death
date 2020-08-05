@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useFocusEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TextInput, Button, Text, View, StyleSheet,TouchableOpacity} from "react-native";
 import { TouchableHighlight, ScrollView } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
@@ -67,6 +67,9 @@ useFocusEffect(
       navigation.navigate('Home')
     };
     BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
   })
 )
  console.log('Keys: ', keys);

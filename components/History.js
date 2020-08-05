@@ -1,10 +1,12 @@
-import React, { useEffect,useState, useFocusEffect } from 'react';
+import React, { useEffect,useState, BackHandler} from 'react';
 import {Text,StyleSheet,View} from 'react-native';
 import Accordian from './Accordian';
 import AsyncStorage from '@react-native-community/async-storage';
 import { set } from 'react-native-reanimated';
 import moment from 'moment';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useFocusEffect } from "@react-navigation/native";
+
 
 const History = ({navigation}) => {
     const [hist, setHist] = useState([]);
@@ -50,19 +52,20 @@ const History = ({navigation}) => {
         fetchAllData();
         }, []);
 
-        useFocusEffect( 
-            React.useCallback(() => {
-              const onBackPress = () => {
-                navigation.navigate('Home')
-              };
-              BackHandler.addEventListener('hardwareBackPress', onBackPress);
-            })
-          )
+        // useFocusEffect( 
+        //     React.useCallback(() => {
+        //       const onBackPress = () => {
+        //         navigation.navigate('Home')
+        //       };
+        //       BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+        //       return () =>
+        // BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        //     })
+        //   )
   
     
     const renderAccordion = (array) => {
-        // console.log('Length of input array: ', array.length);
-        // console.log('History length: ', hist.length);
         const items = [];
         for ( var item of array) {
             const dateNum = parseInt(item.title);
@@ -84,11 +87,24 @@ const History = ({navigation}) => {
         return items;
     }
 
-    const deleteItem = (e) => {
+    const deleteItem = async (e) => {
         console.log('delete', e);
+        try {
+        await AsyncStorage.removeItem(e);
+
+        }
+        catch(error) {
+            console.log(error);
+        }
+        var newArray = [...hist];
+        for (var i = 0; i < newArray.length; i++) {
+            if (newArray[i].title === e) {
+                newArray.splice(i,1);
+            }
+        }
+        setHist(newArray);
     }
 
-    console.log("History length outside: ", hist.length);
     return (
         <ScrollView>
             <View style={styles.container}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useFocusEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TextInput, Button, Text, View, StyleSheet, Image, BackHandler, Alert } from "react-native";
 import {Icon} from 'react-native-elements';
 import Deck from "./Deck";
@@ -32,6 +32,9 @@ const Timer = ({ route, navigation }) => {
       };
 
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
 
     })
   )
@@ -103,7 +106,7 @@ const Timer = ({ route, navigation }) => {
           {minutes}:{secs}
         </Text>
         <TouchableHighlight style={styles.buttonStylePause} onPress={toggle}>
-          {!isActive ? <Icon size={60} color={'white'} name="pause-circle-filled" /> : <Icon size={60} color={'white'} name='pause-circle-outline' />}
+          {!isActive ? <Icon size={60} color={'white'} name="pause-circle-filled" /> : <Icon size={60} color={'#ffffff87'} name='pause-circle-outline' />}
           {/* <Text style={styles.buttonText}>{isActive ? "Pause" : "Resume"}</Text> */}
         </TouchableHighlight>
       </View>
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     flex: 1,
-    backgroundColor: '#353839',
+    backgroundColor: '#121212',
     marginTop: '6%'
 
   },
@@ -146,7 +149,7 @@ const styles = StyleSheet.create({
   },
   timerText: {
     fontSize:38,
-    color: 'white'
+    color: '#ffffff87'
   }
 });
 export default Timer;

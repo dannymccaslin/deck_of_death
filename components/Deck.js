@@ -98,8 +98,8 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     flex: 1,
-    backgroundColor: '#353839',
-
+    backgroundColor: '#121212',
+    // '#353839'
   },
   cardImage: {
     width: 350,
@@ -118,11 +118,11 @@ const styles = StyleSheet.create({
     flex:1,
     fontSize: 32,
     fontWeight: "bold",
-    color: 'white'
+    color: '#ffffff87',
   },
   cardCount: {
     fontSize: 16,
-    color: 'white'
+    color: '#ffffff87',
   },
 });
 

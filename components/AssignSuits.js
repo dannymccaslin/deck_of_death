@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 10,
     width: 200,
+    color: '#ffffff90'
   },
   buttonStyle: {
     marginTop: 60,
