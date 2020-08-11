@@ -26,7 +26,6 @@ const Settings = ({navigation}) => {
   const changeNumberReps = (text) => setJokersReps(text);
   const changeNoDecks = (text) => setNoDecks(text);
 
-
  
   const updateSettings = () => {
     const newState = {
@@ -73,19 +72,27 @@ const Settings = ({navigation}) => {
         value={noDecks}
         onChangeText={changeNoDecks}
       />
-      <Text>Ace Value</Text>
-      <Text>11</Text>
-      <RadioButton
-        value="11"
-        status={ aceValue === '11' ? 'checked' : 'unchecked'}
-        onPress={() => setAceValue('11')} 
-        />
-        <Text>1</Text>
-        <RadioButton
-        value="1"
-        status={ aceValue === '1' ? 'checked' : 'unchecked'}
-        onPress={() => setAceValue('1')} 
-        />
+      <View styule={styles.avContainer}>
+        <Text>Ace Value</Text>
+        <View style={avRadioCol}>
+          <View style={atyles.avRadioRow}>
+            <Text>11</Text>
+            <RadioButton
+              value="11"
+              status={ aceValue === '11' ? 'checked' : 'unchecked'}
+              onPress={() => setAceValue('11')} 
+              />
+            </View>
+            <View style={styles.avRadioRow}>
+              <Text>1</Text>
+              <RadioButton
+              value="1"
+              status={ aceValue === '1' ? 'checked' : 'unchecked'}
+              onPress={() => setAceValue('1')} 
+              />
+            </View>
+          </View>
+        </View>
       <TouchableHighlight style={styles.buttonStyle} onPress={updateSettings}>
         <Text style={styles.buttonText}>Save Settings</Text>
       </TouchableHighlight>
@@ -122,6 +129,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+  avContainer: {
+    flexDirection: 'row'
+  },
+  avRadioCol: {
+    flexDirection: 'column'
+  },
+  avRadioRow: {
+    flexDirection: 'row'
+  }
 });
 
 export default Settings;
