@@ -1,6 +1,7 @@
 import React, { useEffect,useState, BackHandler} from 'react';
 import {Text,StyleSheet,View} from 'react-native';
 import Accordian from './Accordian';
+import { Card } from "react-native-paper";
 import AsyncStorage from '@react-native-community/async-storage';
 import { set } from 'react-native-reanimated';
 import moment from 'moment';
@@ -63,22 +64,72 @@ const History = ({navigation}) => {
         // BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         //     })
         //   )
-  
-    
+        const timeView = (time) => {
+            let secs = ("0" + (Math.floor(time / 1) % 60)).slice(-2);
+            let minutes = ("0" + (Math.floor(time / 60) % 60)).slice(-2);
+            return (
+                <Text>{minutes}:{secs}</Text>
+            );
+            };
+
+        const cardMap = (array) => {
+            let totalTime = 0;
+            let spadesTime = 0;
+            let clubsTime = 0;
+            let diamondsTime = 0;
+            let heartsTime = 0;
+            let jokersTime = 0;
+            array.map((cardres) => {
+            const cardName = cardres.card;
+            const cardTime = cardres.time;
+            const cardSuit = cardres.suit;
+            
+            totalTime += cardTime;
+                switch (cardSuit) {
+                case "Spades":
+                    spadesTime += cardTime;
+                    break;
+                case "Clubs":
+                    clubsTime += cardTime;
+                    break;
+                case "Diamonds":
+                    diamondsTime += cardTime;
+                    break;
+                case "Hearts":
+                    heartsTime += cardTime;
+                    break;
+                case "jokers":
+                    jokersTime += cardTime;
+                default:
+                    break;
+                }
+             });
+            return (
+                <View>
+                    <Text>Spades: {timeView(spadesTime)}</Text>
+                    <Text>Clubs: {timeView(clubsTime)}</Text>
+                    <Text>Diamonds: {timeView(diamondsTime)}</Text>
+                    <Text>Hearts: {timeView(heartsTime)}</Text>
+                    <Text>Total: {timeView(totalTime)}</Text>
+                    </View>
+            );
+            }
     const renderAccordion = (array) => {
         const items = [];
         for ( var item of array) {
             const dateNum = parseInt(item.title);
             const date = new Date(dateNum);
             const dateFormat = moment(date).format('MMMM Do YYYY, h:mm a');
-            console.log(item.title);
+            console.log(item.title);        
+            
+            const data = JSON.parse(item.data)
             items.push(
                 <Accordian key={item.title} 
                 style={styles.accordian}
                 id = {item.title}
                 onDelete={(e) => deleteItem(e)}
                 title = {dateFormat}
-                data = {item.data}
+                data = {cardMap(data)}
             />
             );
 
@@ -108,6 +159,7 @@ const History = ({navigation}) => {
     return (
         <ScrollView>
             <View style={styles.container}>
+                <Text>Tap on a date to see a summary of that workout. Long-press the date to delete that workout. (Note: Deleted workouts CANNOT be recovered.)</Text>
                 <View style={styles.row}>
                 { hist ? renderAccordion(hist) : 
                 <View>

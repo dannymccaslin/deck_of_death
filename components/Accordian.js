@@ -30,7 +30,7 @@ export default class Accordian extends Component{
             {
                 this.state.expanded &&
                 <View style={styles.child}>
-                    <Text>{this.props.data}</Text>    
+                    <View>{this.props.data}</View>    
                 </View>
             }
             

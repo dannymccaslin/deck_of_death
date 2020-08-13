@@ -126,9 +126,7 @@ useFocusEffect(
       <Card>
       <Text>Total: {timeView(totalTime)}</Text>
       </Card>
-      <TouchableOpacity onPress ={displayData}>  
-          <Text>Click to display data</Text>  
-        </TouchableOpacity>  
+ 
         <TouchableHighlight
         style={styles.buttonStyle}
         onPress={goToHistory}

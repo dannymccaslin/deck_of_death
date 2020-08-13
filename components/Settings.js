@@ -66,30 +66,34 @@ const Settings = ({navigation}) => {
           />
         </View>
       ) : null}
+      <View style={{margin: 3}}>
       <Text>Number of Decks: </Text>
       <TextInput
         style={styles.input}
         value={noDecks}
         onChangeText={changeNoDecks}
       />
-      <View styule={styles.avContainer}>
+      </View>
+      <View style={styles.avContainer}>
         <Text>Ace Value</Text>
-        <View style={avRadioCol}>
-          <View style={atyles.avRadioRow}>
-            <Text>11</Text>
+        <View style={styles.avRadioCol}>
+          <View style={styles.avRadioRow}>
+            
             <RadioButton
               value="11"
               status={ aceValue === '11' ? 'checked' : 'unchecked'}
               onPress={() => setAceValue('11')} 
               />
+              <Text>11</Text>
             </View>
             <View style={styles.avRadioRow}>
-              <Text>1</Text>
               <RadioButton
               value="1"
               status={ aceValue === '1' ? 'checked' : 'unchecked'}
               onPress={() => setAceValue('1')} 
               />
+               <Text>1</Text>
+
             </View>
           </View>
         </View>
@@ -115,7 +119,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 4,
-    alignItems: "center",
   },
   input: {
     height: 40,
@@ -130,13 +133,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   avContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignContent: 'flex-start',
+    margin: 3
   },
   avRadioCol: {
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   avRadioRow: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center' ,
   }
 });
 
