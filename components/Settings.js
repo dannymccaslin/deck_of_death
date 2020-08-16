@@ -10,7 +10,6 @@ import {
 import {RadioButton} from 'react-native-paper';
 import SettingsContext, { SettingsConsumer } from "../context/SettingsContext";
 import { TouchableHighlight } from "react-native-gesture-handler";
-import {Toast} from 'react-native-root-toast';
 
 const Settings = ({navigation}) => {
   const appSettings = useContext(SettingsContext);

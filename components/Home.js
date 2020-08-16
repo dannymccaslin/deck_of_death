@@ -125,7 +125,7 @@ const height_proportion = "20%";
 
 const styles = StyleSheet.create({
   main: {
-    marginTop: '6%',
+    marginTop: '8%',
     backgroundColor: '#353839',
     width: '100%',
     height: '100%',
